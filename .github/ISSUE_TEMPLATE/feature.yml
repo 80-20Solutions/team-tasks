@@ -1,0 +1,97 @@
+name: 🚀 Feature / Task
+description: Nuova funzionalità o task da completare
+title: "[progetto] "
+labels: ["💻 coding"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Grazie per aver aperto una issue! Compila le sezioni per aiutare il team a capire il task.
+  
+  - type: dropdown
+    id: project
+    attributes:
+      label: Progetto
+      description: A quale progetto si riferisce?
+      options:
+        - maestro
+        - beachref
+        - finn
+        - stageconnect
+        - arbitri-dash
+        - 8020site
+        - infra
+        - altro
+    validations:
+      required: true
+  
+  - type: textarea
+    id: objective
+    attributes:
+      label: 🎯 Obiettivo
+      description: Cosa vogliamo ottenere?
+      placeholder: "Esempio: Aggiungere export CSV dei dati energia"
+    validations:
+      required: true
+  
+  - type: textarea
+    id: tasks
+    attributes:
+      label: 📋 Task Checklist
+      description: Elenco dei sub-task da completare
+      placeholder: |
+        - [ ] Design formato export
+        - [ ] Backend API endpoint
+        - [ ] Frontend UI
+        - [ ] Test
+        - [ ] Documentazione
+    validations:
+      required: true
+  
+  - type: dropdown
+    id: assignee
+    attributes:
+      label: 👤 Chi lo fa?
+      description: A chi è assegnato?
+      options:
+        - Ciccio (DevOps/Infra)
+        - Claudio (Coding)
+        - Davide (Decisione)
+        - Da decidere
+    validations:
+      required: false
+  
+  - type: textarea
+    id: resources
+    attributes:
+      label: 🔗 Risorse
+      description: Link, documentazione, riferimenti utili
+      placeholder: |
+        - Repository: https://github.com/...
+        - API docs: https://...
+        - Figma: https://...
+    validations:
+      required: false
+  
+  - type: textarea
+    id: completion
+    attributes:
+      label: ✅ Criteri Completamento
+      description: Come sappiamo che è finito?
+      placeholder: |
+        - CSV scaricabile dalla UI
+        - Test con dati reali passati
+        - Deploy su production
+    validations:
+      required: false
+  
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priorità
+      options:
+        - high (urgente)
+        - medium (importante)
+        - low (backlog)
+    validations:
+      required: true

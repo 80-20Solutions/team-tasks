@@ -1,0 +1,76 @@
+name: ❓ Question / Decision
+description: Domanda tecnica o decisione da prendere insieme
+title: "[progetto] "
+labels: ["❓ question"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Usa questo template per discussioni, scelte architetturali, o domande al team.
+  
+  - type: dropdown
+    id: project
+    attributes:
+      label: Progetto (opzionale)
+      description: Si riferisce a un progetto specifico?
+      options:
+        - maestro
+        - beachref
+        - finn
+        - stageconnect
+        - arbitri-dash
+        - 8020site
+        - generale
+        - altro
+    validations:
+      required: false
+  
+  - type: textarea
+    id: question
+    attributes:
+      label: ❓ Domanda / Decisione
+      description: Cosa dobbiamo decidere o discutere?
+      placeholder: |
+        "Quale database usare per Finn: PostgreSQL o SQLite?"
+        "Color scheme Maestro v2: blu scuro o nero?"
+        "Deploy strategy: Docker Compose o Kubernetes?"
+    validations:
+      required: true
+  
+  - type: textarea
+    id: context
+    attributes:
+      label: 📝 Contesto
+      description: Background, perché stiamo discutendo di questo?
+      placeholder: |
+        "Finn sta crescendo, SQLite locale inizia a essere limitante.
+        Consideriamo migrazione a PostgreSQL condiviso su VPS."
+    validations:
+      required: false
+  
+  - type: textarea
+    id: options
+    attributes:
+      label: 🔀 Opzioni
+      description: Quali alternative stiamo considerando?
+      placeholder: |
+        **Opzione A**: PostgreSQL su VPS
+        - Pro: condivisione dati, backup centrali
+        - Contro: richiede connessione internet
+        
+        **Opzione B**: SQLite con sync Supabase
+        - Pro: offline-first
+        - Contro: conflitti sync complessi
+    validations:
+      required: false
+  
+  - type: textarea
+    id: resources
+    attributes:
+      label: 🔗 Risorse
+      description: Link utili, docs, esempi
+      placeholder: |
+        - https://docs.example.com
+        - https://github.com/example/repo
+    validations:
+      required: false

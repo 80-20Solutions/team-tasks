@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: 💬 Telegram Team Chat
+    url: https://t.me/+your_invite_link
+    about: Per discussioni veloci, usa il gruppo Telegram 8020dev
+  - name: 📚 Documentazione
+    url: https://github.com/80-20Solutions/team-tasks
+    about: README con workflow e convenzioni

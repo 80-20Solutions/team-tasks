@@ -1,0 +1,104 @@
+name: 🐛 Bug Report
+description: Segnala un problema o malfunzionamento
+title: "[progetto] "
+labels: ["🐛 bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Segnala un bug per aiutarci a migliorare!
+  
+  - type: dropdown
+    id: project
+    attributes:
+      label: Progetto
+      description: Dove si verifica il bug?
+      options:
+        - maestro
+        - beachref
+        - finn
+        - stageconnect
+        - arbitri-dash
+        - 8020site
+        - infra-vps
+        - altro
+    validations:
+      required: true
+  
+  - type: textarea
+    id: description
+    attributes:
+      label: 🐛 Descrizione Bug
+      description: Cosa non funziona?
+      placeholder: "L'app crasha quando premo il bottone Export..."
+    validations:
+      required: true
+  
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: 🔄 Come Riprodurre
+      description: Step per riprodurre il problema
+      placeholder: |
+        1. Vai su Dashboard Energia
+        2. Clicca "Export CSV"
+        3. App crasha
+    validations:
+      required: true
+  
+  - type: textarea
+    id: expected
+    attributes:
+      label: ✅ Comportamento Atteso
+      description: Cosa dovrebbe succedere?
+      placeholder: "Dovrebbe scaricare il file CSV"
+    validations:
+      required: true
+  
+  - type: textarea
+    id: actual
+    attributes:
+      label: ❌ Comportamento Attuale
+      description: Cosa succede invece?
+      placeholder: "L'app crasha con errore NullPointerException"
+    validations:
+      required: true
+  
+  - type: textarea
+    id: logs
+    attributes:
+      label: 📋 Log / Screenshot
+      description: Log di errore, screenshot, video
+      placeholder: |
+        ```
+        Error: NullPointerException at line 42
+        ```
+        
+        Oppure trascina screenshot qui
+    validations:
+      required: false
+  
+  - type: textarea
+    id: environment
+    attributes:
+      label: 🖥️ Ambiente
+      description: Dove si verifica?
+      placeholder: |
+        - Device: iPhone 14 / Galaxy S23 / VPS
+        - OS: iOS 17 / Android 14 / Ubuntu 24.04
+        - App version: 1.2.3
+        - Browser: Chrome 120 (se web)
+    validations:
+      required: false
+  
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Gravità
+      options:
+        - critical (app inutilizzabile)
+        - high (funzione importante rotta)
+        - medium (fastidioso ma workaround esiste)
+        - low (cosmetico)
+    validations:
+      required: true

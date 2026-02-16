@@ -1,0 +1,42 @@
+name: Telegram Notifications
+
+on:
+  issues:
+    types: [opened, closed, assigned]
+  issue_comment:
+    types: [created]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Telegram Notification
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          # Prepara messaggio basato sull'evento
+          if [ "${{ github.event.action }}" = "opened" ]; then
+            EMOJI="✨"
+            ACTION="aperta"
+            MESSAGE="$EMOJI *Nuova Issue Aperta*%0A%0A*#${{ github.event.issue.number }}* - ${{ github.event.issue.title }}%0A%0A👤 Creata da: @${{ github.event.issue.user.login }}%0A🏷️ Labels: $(echo '${{ toJson(github.event.issue.labels.*.name) }}' | tr -d '[]"' | sed 's/,/, /g')%0A%0A🔗 [Vedi Issue](${{ github.event.issue.html_url }})"
+          elif [ "${{ github.event.action }}" = "closed" ]; then
+            EMOJI="✅"
+            ACTION="chiusa"
+            MESSAGE="$EMOJI *Issue Chiusa*%0A%0A*#${{ github.event.issue.number }}* - ${{ github.event.issue.title }}%0A%0A👤 Chiusa da: @${{ github.event.sender.login }}%0A%0A🔗 [Vedi Issue](${{ github.event.issue.html_url }})"
+          elif [ "${{ github.event.action }}" = "assigned" ]; then
+            EMOJI="📌"
+            ACTION="assegnata"
+            MESSAGE="$EMOJI *Issue Assegnata*%0A%0A*#${{ github.event.issue.number }}* - ${{ github.event.issue.title }}%0A%0A👤 Assegnata a: @${{ github.event.assignee.login }}%0A%0A🔗 [Vedi Issue](${{ github.event.issue.html_url }})"
+          elif [ "${{ github.event_name }}" = "issue_comment" ]; then
+            EMOJI="💬"
+            COMMENT_BODY=$(echo "${{ github.event.comment.body }}" | head -c 100)
+            MESSAGE="$EMOJI *Nuovo Commento*%0A%0A*#${{ github.event.issue.number }}* - ${{ github.event.issue.title }}%0A%0A👤 @${{ github.event.comment.user.login }}: ${COMMENT_BODY}...%0A%0A🔗 [Vedi Commento](${{ github.event.comment.html_url }})"
+          fi
+          
+          # Invia a Telegram
+          curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+            -d "chat_id=${TELEGRAM_CHAT_ID}" \
+            -d "text=${MESSAGE}" \
+            -d "parse_mode=Markdown" \
+            -d "disable_web_page_preview=true"
